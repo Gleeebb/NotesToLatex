@@ -1,0 +1,96 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,mathrsfs,mathtext}
+\usepackage{graphicx, epsfig}
+\usetheme{Warsaw}%{Singapore}%{Warsaw}%{Warsaw}%{Darmstadt}
+\usecolortheme{sidebartab}
+\definecolor{beamer@blendedblue}{RGB}{15,120,80}
+%----------------------------------------------------------------------------------------------------------
+\title[\hbox to 56mm{ Notes to \LaTeX \hfill\insertframenumber\,/\,\inserttotalframenumber}]
+{Web-сервис для конвертирования рукописных конспектов  в  \LaTeX-документ}
+\author[Т. Гадаев, Г. Моргачев, Е. Шульгин]{\large \\Т. Гадаев, Г. Моргачев, Е. Шульгин}
+\institute{\large
+Московский физико-технический институт  \\ Факультет управления и прикладной математики}
+
+\date{\footnotesize{\emph{Курс:} Основы объектно ориентированного программирования \par (лабораторные, А.\,И. Панов)/Группа 571, весна 2017}}
+%----------------------------------------------------------------------------------------------------------
+\begin{document}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}
+%\thispagestyle{empty}
+\titlepage
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Идея проекта}
+    \begin{itemize}
+        \item Web-сервис для оцифровки конспектов и последующего быстрого редактирования
+        \item Распознавание текста, формул и графиков с помощью нейросетевых технологий
+        \item Совместное редактирование
+    \end{itemize}
+\end{frame}
+%-----------------------------------------------------------------------------------------------------
+\begin{frame}{Распределение по задачам}
+    
+\begin{block}{Гадаев Тамаз - тимлид}
+    Распознавание
+\end{block}
+\begin{block}{Моргачев Глеб}
+    Back-end
+\end{block}
+\begin{block}{Шульгин Егор}
+    Front-end
+\end{block}
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Аналоги}
+    \textbf{JMathNotes}
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.7\linewidth]{../../../Downloads/jmn-300x221}
+            \label{fig:jmn-300x221}
+        \end{figure}
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Аналоги}
+    \textbf{Myscript}
+        \begin{figure}
+            \centering
+            \includegraphics[width=1\linewidth]{../../../Desktop/Math}
+            \label{fig:math}
+        \end{figure}
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Аналоги}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{../../../Desktop/Detexify}
+        \label{fig:math}
+    \end{figure}
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Аналоги}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{../../../Desktop/ABBY}
+        \label{fig:math}
+    \end{figure}
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Датасет}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\linewidth]{../../../Desktop/Dataset}
+        \label{fig:math}
+    \end{figure}
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\begin{frame}{Особенности нашей реализации}
+    \begin{itemize}
+        \item Работа в браузере
+        \item Анализ всего документа
+        \item Интеллектуальный онлайн-редактор
+    \end{itemize}
+\end{frame}
+%----------------------------------------------------------------------------------------------------------
+\end{document} 
