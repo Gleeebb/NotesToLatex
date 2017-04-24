@@ -1,15 +1,11 @@
 {% extends 'download_files/base.html' %}
 
-
-
-{% block introduction %}
-        <div>
-            <h1>{{ text }}</h1>
-        </div>
+{% block title %}
+    Title
 {% endblock %}
 
 {% block content %}
-        <div>
-            <p class="center">Какой-то ещё текст.</p>>
-        </div>
+    <div class="jumbonton">
+        {{ text }}
+    </div>
 {% endblock %}

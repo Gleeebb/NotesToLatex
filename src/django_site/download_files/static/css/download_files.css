@@ -1,12 +1,4 @@
-body {
-  padding-top: 70px;
-  padding-bottom: 30px;
-}
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
-}
 
-mytheme {
-  margin: 5px 0;
+body {
+    overflow-y: scroll;
 }

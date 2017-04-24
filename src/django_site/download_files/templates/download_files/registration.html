@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 {% extends 'download_files/base.html' %}
+{% load bootstrap %}
+
+{% block title %}
+    Registration
+{% endblock %}
 
 {%  block content %}
-    <h1>Регистрация</h1>
-    <form action="" method="post">
+    <form method="POST" action=".">
         {% csrf_token %}
         <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
-        {{ form.as_p }}
-        <button type="submit">Зарегистрироваться</button>
+        {{ form_register|bootstrap }}
+        <button class="btn btn-primary active" type="submit">Зарегистрироваться</button>
     </form>
 {% endblock %}
