@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from forms import FileForm, CreateUserForm, LoginForm
 from django.views.generic.base import View
-from django.contrib.auth import authenticate
+
+from forms import FileForm, CreateUserForm, AuthenticationForm, NameForm
 
 
 # Представление стартовой страницы.
 class Index(View):
     def get(self, request):
         text = r'hello'
-        return render(request, 'download_files/index.html', {'text': text, 'nbar': 'home'})
-
+        return render(request, 'download_files/index.html',
+                      {'text': text, 'nbar': 'home'})
 
 
 # Представление страницы загрузки.
@@ -21,10 +22,11 @@ class Download(View):
         if form.is_valid():
             form.save()
             return redirect('index')
+
     def get(self, request):
         form = FileForm()
-        return render(request, 'download_files/download.html', {'form': form, 'nbar': 'dwn'})
-
+        return render(request, 'download_files/download.html',
+                      {'form': form, 'nbar': 'dwn'})
 
 
 # Представление страницы регистрации пользователей.
@@ -36,29 +38,44 @@ class Register(View):
             text = "Cпасибо за регистрацию!"
         else:
             text = r'Registration Error'
-        return render(request, 'download_files/index.html', {'text': text})
+        return render(request, 'download_files/index.html',
+                      {'text': text})
+
     def get(self, request):
         form = CreateUserForm()
-        return render(request, 'download_files/registration.html', {'form_register': form, 'nbar': 'rgst'})
+        return render(request, 'download_files/registration.html',
+                      {'form_register': form, 'nbar': 'rgst'})
+
 
 # Проблемы с непосредственно авторизацией.
 class Login(View):
     def post(self, request):
-        form = LoginForm(request.POST or None)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            print form.cleaned_data['email'], form.cleaned_data['password']
-            user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
+            # userBackend = UserBackend()
+            user = authenticate(username=form.cleaned_data['username'],
+                                password=form.cleaned_data['password'])
+            text = 'All is okay'
             if user is not None:
-                # the password verified for the user
                 if user.is_active:
+                    login(request, user)
                     text = r"User is valid, active and authenticated"
                 else:
-                    text = r"The password is valid, but the account has been disabled!"
+                    text = r"The password is valid, but the account has\
+                     been disabled!"
             else:
                 text = r'ERROR'
         else:
-            text = r'Log in error'
-        return render(request, 'download_files/index.html', {'text': text})
+            text = 'FORM is not valid'
+        return render(request, 'download_files/index.html',
+                      {'text':text})
+
     def get(self, request):
-        form = LoginForm()
-        return render(request, 'download_files/login.html', {'form': form, 'nbar': 'lgn'})
+        form = AuthenticationForm()
+        return render(request, 'download_files/login.html',
+                      {'form': form, 'nbar': 'lgn'})
+
+class DocRenderView(View):
+    def get(self, request):
+        return render(request, 'download_files/render.html',
+                      {'nbar': 'rnd'})

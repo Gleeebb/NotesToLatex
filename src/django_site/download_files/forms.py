@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from django.utils.translation import gettext, gettext_lazy as _
-from .models import File, User
-from django.contrib.auth.forms import UserCreationForm, UsernameField
+from django.contrib.auth.forms import UserCreationForm, UsernameField,\
+    AuthenticationForm as BaseAuthenticationForm
+from django.contrib.auth import forms as form
+from django.utils.translation import gettext_lazy as _
 
+from .models import File, User
 
 
 
@@ -15,6 +17,7 @@ class FileForm(forms.ModelForm):
 
 
 class CreateUserForm(UserCreationForm):
+
     password1 = forms.CharField(
         label=_("Password"),
         strip=False,
@@ -32,22 +35,28 @@ class CreateUserForm(UserCreationForm):
     username = forms.CharField(
         help_text="Имя пользователя должно содержать только английские буквы.",
     )
+
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'username', 'email', 'password1',
+                  'password2')
         field_classes = {'username': UsernameField}
 
 
-class LoginForm(forms.ModelForm):
-    password = forms.CharField(
-       label=_("Password"),
-       strip=False,
-       widget=forms.PasswordInput,
-       help_text="",
+class AuthenticationForm(forms.Form):
+    username = UsernameField(
+        max_length=254,
+        widget=forms.TextInput(attrs={'autofocus': True}),
     )
-    class Meta:
-        model = User
-        fields = ['email', 'password']
+    password = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput,
+    )
 
+
+
+class NameForm(forms.Form):
+    your_name = forms.CharField(label='Your name', max_length=100)
 
 

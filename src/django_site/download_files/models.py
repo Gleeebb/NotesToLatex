@@ -1,12 +1,6 @@
 # coding=utf-8
+from django.contrib.auth.models import User, User
 from django.db import models
-from django.contrib.auth.models import User, UserManager as BaseUserManager,\
-    User
-from django.utils import timezone
-# Пока без регистрации пользователей, человек пишет ник
-# под которым и будут хранится его данные в базе данных
-#
-
 
 
 class File(models.Model):

@@ -1,4 +1,9 @@
 
 body {
     overflow-y: scroll;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+span2 {
+    background-color: #2aabd2;
 }
