@@ -7,3 +7,10 @@ body {
 span2 {
     background-color: #2aabd2;
 }
+
+
+.profile-image {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    width: 30px;
+}

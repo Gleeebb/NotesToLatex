@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 
-from forms import FileForm, CreateUserForm, AuthenticationForm, NameForm
+from forms import FileForm, CreateUserForm, AuthenticationForm
 
 
 # Представление стартовой страницы.
@@ -12,16 +12,21 @@ class Index(View):
     def get(self, request):
         text = r'hello'
         return render(request, 'download_files/index.html',
-                      {'text': text, 'nbar': 'home'})
+                      {'text': request.user.id, 'nbar': 'home'})
 
 
 # Представление страницы загрузки.
 class Download(View):
-    def post(self, request):
+    def post(self, request ):
         form = FileForm(request.POST or None, request.FILES or None)
         if form.is_valid():
-            form.save()
+            newform = form.save(commit=False)
+            newform.user = request.user
+            newform.save()
             return redirect('index')
+        text = 'error'
+        return render(request, 'download_files/index.html',
+                      {'text': text})
 
     def get(self, request):
         form = FileForm()
@@ -52,10 +57,8 @@ class Login(View):
     def post(self, request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            # userBackend = UserBackend()
             user = authenticate(username=form.cleaned_data['username'],
                                 password=form.cleaned_data['password'])
-            text = 'All is okay'
             if user is not None:
                 if user.is_active:
                     login(request, user)
