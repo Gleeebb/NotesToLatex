@@ -32,6 +32,12 @@
 
                 <div class="collapse navbar-collapse nav-justified">
                     <ul class="nav navbar-nav ">
+                        {% if user.is_authenticated %}
+                            <li class="{% if nbar == 'fls' %}
+                                            active{% endif %}">
+                                <a href="/files/">My files</a>
+                            </li>
+                        {% endif %}
                         <li><a href="/">About</a></li>
                         <li><a href="/">Contact</a></li>
                     </ul>
@@ -46,6 +52,9 @@
                                 <img src="{% static 'files/download.jpg' %}" alt="My image"}}
                                      class="profile-image img-circle">
                                 </div>
+                            </li>
+                            <li>
+                                <a href="/logout/" role="button">log out</a>
                             </li>
                         {% else %}
                             <li class="{% if nbar == 'lgn' %}
