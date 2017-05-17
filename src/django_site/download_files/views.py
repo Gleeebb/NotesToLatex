@@ -108,5 +108,5 @@ class MyFiles(View):
         imgs = File.objects.filter(user = request.user)
         text = request.user
         return render(request, 'download_files/files.html',
-                      {'nbar': 'fls', 'text': text})
+                      {'nbar': 'fls', 'text': text, 'imgs': imgs})
 

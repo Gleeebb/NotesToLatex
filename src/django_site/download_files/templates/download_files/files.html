@@ -3,9 +3,19 @@
 {% block title %}
     Загруженные файлы
 {% endblock %}
+{% load bootstrap %}
+{% load staticfiles %}
 
 {% block content %}
-    <div class="jumbonton">
-        {{ text }}
+
+    <div class="container">
+            {% for img in imgs %}
+                <div class="col-md-3 col-sm-4 col-xs-3 thumb">
+                    <a class="fancyimage" rel="group" href="{{img.file.url}}">
+                        <img class="img-responsive" src="{{img.file.url}}" />
+                    </a>
+                </div>
+            {% endfor %}
     </div>
+
 {% endblock %}

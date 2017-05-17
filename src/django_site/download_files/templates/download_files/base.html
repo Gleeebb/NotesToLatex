@@ -10,8 +10,11 @@
     <link rel="stylesheet" href="{% static 'css/download_files.css' %}">
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}"
           rel="stylesheet" media="screen">
+     <link rel="stylesheet" href="{% static 'fancybox/jquery.fancybox.css' %}"
+           type="text/css" media="screen" />
     <meta charset="UTF-8">
-    <title>the best project</title>
+    {% load staticfiles %}
+    <title>NotesToLatex</title>
 </head>
     <body role="document">
 
@@ -49,7 +52,7 @@
                             </li>
                             <li>
                                 <div class="button-navbar">
-                                <img src="{% static 'files/download.jpg' %}" alt="My image"}}
+                                <img src="{% static 'files/download.png' %}" alt="My image"}}
                                      class="profile-image img-circle">
                                 </div>
                             </li>
@@ -68,31 +71,37 @@
                         {% endif %}
                     </ul>
                 </div>
-
             </div>
         </div>
         </div>
-
 
         <div class="container">
-            <div class="page-header">
-{#                <div class="col-md-3">#}
-                    <h1>
-                        {% block title %}
-                        {% endblock %}
-                    </h1>
-{#                </div>#}
+            <div class=" col-md-push-0">
+                <div class="page-header">
+                        <h1>
+                            {% block title %}
+                            {% endblock %}
+                        </h1>
+                </div>
             </div>
-        </div>
 
-        <div class= "container mytheme" role="main">
-                <div class="col-md-9 col-md-push-3">
+            <div class= "row" role="main">
+                <div class="col-md-9 col-md-push-1">
                     {% block content %}
                     {% endblock %}
                 </div>
             </div>
         </div>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../static/jquery/jquery-1.11.2.min.js"></script>
+        <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../static/fancybox/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("a.fancyimage").fancybox();
+            });
+        </script>
     </body>
 </html>
