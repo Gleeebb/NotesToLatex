@@ -30,6 +30,11 @@
         </div>
         <div class="row" >
             <div class="col-md-2 col-md-offset-5">
+                <form method="POST" class="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form |bootstrap }}
+                    <button type="submit" class="save btn btn-default">Save</button>
+                </form>
             </div>
         </div>
     </div>
