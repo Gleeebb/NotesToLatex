@@ -7,7 +7,7 @@
 ## Установка и настройка **virtualenv**
 ```bash
 sudo pip install virtualenv
-virtualend Notes
+virtualenv Notes
 source ./myapp/bin/activate
 cd ./myapp
 ```
