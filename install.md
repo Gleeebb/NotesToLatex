@@ -8,8 +8,8 @@
 ```bash
 sudo pip install virtualenv
 virtualenv Notes
-source ./myapp/bin/activate
-cd ./myapp
+source ./Notes/bin/activate
+cd ./Notes
 ```
 
 ## Загрузка репозитория
