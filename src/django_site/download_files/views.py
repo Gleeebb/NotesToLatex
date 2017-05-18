@@ -19,28 +19,6 @@ class Index(View):
                       {'text': request.user.id, 'nbar': 'home'})
 
 
-# Представление страницы загрузки.
-class Download(View):
-
-    @method_decorator(login_required(redirect_field_name='index'))
-    def post(self, request ):
-        form = FileForm(request.POST or None, request.FILES or None)
-        if form.is_valid():
-            newform = form.save(commit=False)
-            newform.user = request.user
-            newform.save()
-            return redirect('index')
-        text = 'error'
-        return render(request, 'download_files/index.html',
-                      {'text': text})
-
-    @method_decorator(login_required(redirect_field_name='index'))
-    def get(self, request):
-        form = FileForm()
-        return render(request, 'download_files/download.html',
-                      {'form': form, 'nbar': 'dwn'})
-
-
 # Представление страницы регистрации пользователей.
 class Register(View):
 
@@ -87,6 +65,18 @@ class Login(View):
         return render(request, 'download_files/login.html',
                       {'form': form, 'nbar': 'lgn'})
 
+
+class Editor(View):
+
+    def get(self, request, img_id):
+        img_id = int(img_id)
+        print img_id
+        img = File.objects.get(id=img_id)
+        # form = FlatPageForm()
+        return render(request, 'download_files/editor.html',
+                      {'img': img,})
+
+
 class Logout(View):
 
     def get(self, request):
@@ -94,12 +84,6 @@ class Logout(View):
         return render(request, 'download_files/index.html')
 
 
-class DocRenderView(View):
-
-    @method_decorator(login_required(redirect_field_name='index'))
-    def get(self, request):
-        return render(request, 'download_files/render.html',
-                     {'nbar': 'rnd'})
 
 class MyFiles(View):
 
@@ -107,6 +91,22 @@ class MyFiles(View):
     def get(self, request):
         imgs = File.objects.filter(user = request.user)
         text = request.user
+        form = FileForm()
         return render(request, 'download_files/files.html',
-                      {'nbar': 'fls', 'text': text, 'imgs': imgs})
+                      {'nbar': 'fls', 'text': text, 'imgs': imgs,
+                       'form': form})
+
+    @method_decorator(login_required(redirect_field_name='index'))
+    def post(self, request):
+        form = FileForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            newform = form.save(commit=False)
+            newform.user = request.user
+            newform.save()
+            return redirect('index')
+        text = 'error'
+        return render(request, 'download_files/index.html',
+                      {'text': text,})
+
+
 

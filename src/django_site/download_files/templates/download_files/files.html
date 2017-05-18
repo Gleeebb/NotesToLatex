@@ -9,13 +9,29 @@
 {% block content %}
 
     <div class="container">
+        <div class="row">
             {% for img in imgs %}
                 <div class="col-md-3 col-sm-4 col-xs-3 thumb">
-                    <a class="fancyimage" rel="group" href="{{img.file.url}}">
-                        <img class="img-responsive" src="{{img.file.url}}" />
-                    </a>
+                    <div class="thumbnail">
+                        <a class="fancyimage" rel="group"
+                           href="{{img.file.url}}">
+                            <img class="img-responsive" src="{{img.file.url}}">
+                        </a>
+                        <div class="caption">
+                            <a href="{% url 'editor' img_id=img.id %}"
+                               class="btn btn-primary btn-block"
+                               role="button">
+                                Открыть в редакторе
+                            </a>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
+        </div>
+        <div class="row" >
+            <div class="col-md-2 col-md-offset-5">
+            </div>
+        </div>
     </div>
 
 {% endblock %}

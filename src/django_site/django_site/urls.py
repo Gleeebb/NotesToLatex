@@ -9,7 +9,6 @@ from django.conf.urls.static import static
 # admin.autodiscover()
 
 urlpatterns = [
-
     url(r'^', include('download_files.urls')),
     url(r'^admin/', admin.site.urls),
 ]

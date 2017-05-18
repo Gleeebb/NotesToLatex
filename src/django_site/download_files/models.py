@@ -11,3 +11,4 @@ class File(models.Model):
 class ProfilePhoto(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     file = models.ImageField(upload_to='')
+

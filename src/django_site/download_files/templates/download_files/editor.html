@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'download_files/base_editor.html' %}
+
+{% block title %}
+
+    Отредактируйте ваш документ
+{% endblock %}
+{% load staticfiles %}
+{% load bootstrap%}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-6 col-md-push-0">
+            <img src="{{img.file.url}}" style="width: 100%; hight: auto;">
+        </div>
+        <div class="col-md-6 col-md-push-0">
+            ГДЕ ТО ТУТ РЕДАКТОР
+            <form method="POST" class="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

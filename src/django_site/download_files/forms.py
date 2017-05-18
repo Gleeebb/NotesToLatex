@@ -3,11 +3,17 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.utils.translation import gettext_lazy as _
-
 from .models import File, User
 
 
+
 class FileForm(forms.ModelForm):
+    file = forms.ImageField(
+        label = ("Добавить файл"),
+        help_text = "",
+
+    )
+
     class Meta:
         model = File
         fields = ['file']
