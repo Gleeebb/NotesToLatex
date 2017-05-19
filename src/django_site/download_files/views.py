@@ -70,11 +70,9 @@ class Editor(View):
 
     def get(self, request, img_id):
         img_id = int(img_id)
-        print img_id
         img = File.objects.get(id=img_id)
-        # form = FlatPageForm()
         return render(request, 'download_files/editor.html',
-                      {'img': img,})
+                      {'img': img})
 
 
 class Logout(View):
@@ -103,10 +101,7 @@ class MyFiles(View):
             newform = form.save(commit=False)
             newform.user = request.user
             newform.save()
-            return redirect('index')
+            return redirect('myfiles')
         text = 'error'
         return render(request, 'download_files/index.html',
-                      {'text': text,})
-
-
-
+                      {'text': text})
