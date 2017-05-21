@@ -1,12 +1,11 @@
-<!DOCTYPE html>
 {% extends 'download_files/base_editor.html' %}
 
 {% block title %}
-
-    Отредактируйте ваш документ
+    Загруженные файлы
 {% endblock %}
+{% load bootstrap %}
 {% load staticfiles %}
-{% load bootstrap%}
+
 {% block content %}
 
     <div class="row">
@@ -17,9 +16,8 @@
             ГДЕ ТО ТУТ РЕДАКТОР
             <form method="POST" class="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.media }}
+                {{ form }}
             </form>
         </div>
     </div>
-
 {% endblock %}

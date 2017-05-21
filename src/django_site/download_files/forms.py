@@ -56,4 +56,3 @@ class AuthenticationForm(forms.Form):
         strip=False,
         widget=forms.PasswordInput,
     )
-
