@@ -24,7 +24,7 @@ pip install django
 pip install django-bootstrap-form
 pip install django-tinymce4-lite
 pip install pytesseract
-
+pip instal pillow
 ```
 
 ## Установка средства распознавания текста
@@ -34,6 +34,8 @@ wget https://github.com/tesseract-ocr/tessdata/raw/master/rus.traineddata
 mv "rus.traineddata" "ru.traineddata"
 sudo mv -v ru.traineddata /usr/share/tesseract-ocr/tessdata
 ```
+Возможно, на Вашем устройстве будет необходимо перенести этот файл в другую директорию.
+Если перенесена не в ту, будет ошибка во время расспознавания русского текста.
 
 ## Настройка приложения
 ```bash
