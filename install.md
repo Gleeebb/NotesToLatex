@@ -22,6 +22,17 @@ cd ./NotesToLatex
 ```bash
 pip install django
 pip install django-bootstrap-form
+pip install django-tinymce4-lite
+pip install pytesseract
+
+```
+
+## Установка средства распознавания текста
+```bash
+sudo apt-get install tesseract-ocr
+wget https://github.com/tesseract-ocr/tessdata/raw/master/rus.traineddata
+mv "rus.traineddata" "ru.traineddata"
+sudo mv -v ru.traineddata /usr/share/tesseract-ocr/tessdata
 ```
 
 ## Настройка приложения
