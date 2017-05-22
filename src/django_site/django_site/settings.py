@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'bootstrapform',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'markdownx',
+    'tinymce',
 ]
 
 SITE_ID = 1
@@ -124,7 +124,6 @@ USE_TZ = True
 
 ENV_PATH = os.path.abspath(os.path.dirname(__file__))
 
-MARKDOWNX_EDITOR_RESIZABLE = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'download_files/static/')
 STATIC_URL = '/static/'

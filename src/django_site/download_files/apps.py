@@ -6,3 +6,6 @@ from django.apps import AppConfig
 
 class DownloadFilesConfig(AppConfig):
     name = 'download_files'
+
+class TestsConfig(AppConfig):
+    name = 'test_tinymce'

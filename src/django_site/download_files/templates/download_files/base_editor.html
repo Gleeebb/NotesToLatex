@@ -13,6 +13,7 @@
            type="text/css" media="screen" />
     <meta charset="UTF-8">
     <title>NotesToLatex</title>
+    {{ form.media }}
 </head>
     <body role="document">
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -85,7 +86,7 @@
         </div>
         <div class="container-fluid">
               <div class= "row" role="main">
-                  <div class="col-md-9 col-md-push-1">
+                  <div class="col-md-10 col-md-push-1">
                       {% block content %}
                       {% endblock %}
                   </div>

@@ -10,7 +10,6 @@
     <div class="col-md-8">
         <form method="POST" action=".">
             {% csrf_token %}
-            <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
             {{ form_register|bootstrap }}
             <button class="btn btn-primary active" type="submit">
                 Зарегистрироваться

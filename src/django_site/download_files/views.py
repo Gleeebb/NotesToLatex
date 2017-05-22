@@ -72,17 +72,21 @@ class Editor(View):
     def get(self, request, img_id):
         img_id = int(img_id)
         img = File.objects.get(id=img_id)
-        form = TextInput(initial={'text': img.SearchText()})
+        form = TextInput(initial={'content': img.SearchText()})
         return render(request, 'download_files/editor.html',
                       {'img': img, 'form': form})
 
-    # @method_decorator(login_required(redirect_field_name='index'))
-    # def post(self, request, img_id):
-    #     img_id = int(img_id)
-    #     img = File.objects.get(id=img_id)
-    #     form = MyForm(initial={'myfield': img.SearchText()})
-    #     return render(request, 'download_files/editor.html',
-    #                   {'img': img, 'form': form})
+    @method_decorator(login_required(redirect_field_name='index'))
+    def post(self, request, img_id):
+        img_id = int(img_id)
+        img = File.objects.get(id=img_id)
+        form = TextInput(request.POST or None)
+        if form.is_valid():
+            data = form.save()
+            img.SaveChanges(data)
+            # redirect('editor')
+        return render(request, 'download_files/editor.html',
+                      {'img': img, 'form': form})
 
 
 class Logout(View):

@@ -15,7 +15,6 @@ class File(models.Model):
 
     def SearchText(self, local='ru'):
         if len(self.file_out.name) <= 1:   # Дикий костыль
-            print "rrrrrrrrrrrrrrrrrrrrrrrrrr"
             im = Image.open(settings.BASE_DIR + self.file.url)
             string = image_to_string(im, lang=local)
             self.file_out.save(self.file.name, ContentFile(string))

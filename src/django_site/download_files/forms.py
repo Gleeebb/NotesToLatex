@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.utils.translation import gettext_lazy as _
 from .models import File, User
-from markdownx.fields import MarkdownxFormField
+from tinymce import TinyMCE
 
 
 
@@ -62,7 +62,7 @@ class AuthenticationForm(forms.Form):
 
 
 class TextInput(forms.Form):
-    text = MarkdownxFormField()
+    content = forms.CharField(widget=TinyMCE(mce_attrs={}))
 
-    # def save_text(self):
-    #
+    def save(self):
+        return self.cleaned_data['content'].encode('utf-8')

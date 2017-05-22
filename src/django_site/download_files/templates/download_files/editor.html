@@ -1,22 +1,30 @@
 {% extends 'download_files/base_editor.html' %}
 
 {% block title %}
-    Загруженные файлы
+    Приведите Ваш текст в порядок
 {% endblock %}
 {% load bootstrap %}
 {% load staticfiles %}
 
 {% block content %}
 
-    <div class="container">
-            <form method="POST" action="">{% csrf_token %}
-                {{ form|bootstrap  }}
-                {{ form.media }}
-            </form>
+    <div class="container-fluid">
 
-            <button class="btn btn-primary active" type="submit">
-                Сохранить
-            </button>
+        <div class="row">
+            <div class="col-md-6">
+                <form method="POST" action=".">
+                    {% csrf_token %}
+                    {{form.content}}
+                    <button class="btn btn-primary active" type="submit">
+                        Сохранить
+                    </button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <img class="img-responsive" src="{{img.file.url}}">
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}
