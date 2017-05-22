@@ -24,7 +24,7 @@ pip install django
 pip install django-bootstrap-form
 pip install django-tinymce4-lite
 pip install pytesseract
-pip instal pillow
+pip install pillow
 ```
 
 ## Установка средства распознавания текста
