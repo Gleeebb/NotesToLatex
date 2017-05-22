@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrapform',
     'django.contrib.sites',
-    'django.contrib.flatpages'
+    'django.contrib.flatpages',
+    'markdownx',
 ]
 
 SITE_ID = 1
@@ -123,8 +124,9 @@ USE_TZ = True
 
 ENV_PATH = os.path.abspath(os.path.dirname(__file__))
 
+MARKDOWNX_EDITOR_RESIZABLE = True
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'download_files/static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'download_files/static/')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

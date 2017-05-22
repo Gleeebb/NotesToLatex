@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'logout/', Logout.as_view(), name='logout'),
     url(r'files/', MyFiles.as_view(), name='myfiles'),
     url(r'editor/img/(?P<img_id>\d+)/', Editor.as_view(), name='editor'),
+    url(r'^markdownx/', include('markdownx.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -3,7 +3,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
-from forms import FileForm, CreateUserForm, AuthenticationForm
+from forms import FileForm, CreateUserForm, AuthenticationForm, TextInput
 from models import File
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -68,11 +68,21 @@ class Login(View):
 
 class Editor(View):
 
+    @method_decorator(login_required(redirect_field_name='index'))
     def get(self, request, img_id):
         img_id = int(img_id)
         img = File.objects.get(id=img_id)
+        form = TextInput(initial={'text': img.SearchText()})
         return render(request, 'download_files/editor.html',
-                      {'img': img})
+                      {'img': img, 'form': form})
+
+    # @method_decorator(login_required(redirect_field_name='index'))
+    # def post(self, request, img_id):
+    #     img_id = int(img_id)
+    #     img = File.objects.get(id=img_id)
+    #     form = MyForm(initial={'myfield': img.SearchText()})
+    #     return render(request, 'download_files/editor.html',
+    #                   {'img': img, 'form': form})
 
 
 class Logout(View):

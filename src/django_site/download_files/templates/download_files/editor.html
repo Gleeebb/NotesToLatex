@@ -8,16 +8,15 @@
 
 {% block content %}
 
-    <div class="row">
-        <div class="col-md-6 col-md-push-0">
-            <img src="{{img.file.url}}" style="width: 100%; hight: auto;">
-        </div>
-        <div class="col-md-6 col-md-push-0">
-            ГДЕ ТО ТУТ РЕДАКТОР
-            <form method="POST" class="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form }}
+    <div class="container">
+            <form method="POST" action="">{% csrf_token %}
+                {{ form|bootstrap  }}
+                {{ form.media }}
             </form>
-        </div>
+
+            <button class="btn btn-primary active" type="submit">
+                Сохранить
+            </button>
     </div>
+
 {% endblock %}
