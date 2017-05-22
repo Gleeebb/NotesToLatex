@@ -1,0 +1,52 @@
+{% extends 'download_files/base.html' %}
+
+{% block title %}
+    Ваш профиль
+{% endblock %}
+{% load bootstrap %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-7">
+            <div class="btn-group btn-group-justified indent">
+                <div class="btn-group">
+                    <a href="/profile/data/">
+                    <button  type="button" class="btn btn-primary
+                        {% if type == 'data'%}
+                            disabled
+                        {% endif %}">
+                        Редактирование информации
+                    </button>
+                    </a>
+                </div>
+
+                <div class="btn-group">
+                    <a href="/profile/password/">
+                        <button  type="button" class="btn btn-primary
+                            {% if type == 'password'%}
+                                disabled
+                            {% endif %}">
+                            Изменение пароля
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <form method="POST" class="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form |bootstrap }}
+                <button type="submit" class="save btn btn-primary">Сохранить изменения</button>
+            </form>
+            {{text}}
+        </div>
+
+        
+
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+{% endblock %}

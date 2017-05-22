@@ -45,15 +45,17 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
-                            <li>
-                                <a>{{ user.username }}</a>
+                            <li class="{% if nbar == 'prf' %}
+                                            active{% endif %}">
+                                <a href="/profile/data/">{{ user.username }}</a>
                             </li>
                             <li>
                                 <div class="button-navbar">
+                                    &nbsp;
                                 <img src="{% static 'files/download.png' %}"
                                      alt="My image"}}
                                      class="profile-image img-circle">
-                                </div>
+                                </div
                             </li>
                             <li>
                                 <a href="/logout/" role="button">log out</a>

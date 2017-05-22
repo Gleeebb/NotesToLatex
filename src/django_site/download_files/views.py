@@ -3,10 +3,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
-from forms import FileForm, CreateUserForm, AuthenticationForm, TextInput
-from models import File
+from forms import FileForm, CreateUserForm, AuthenticationForm, TextInput, \
+                  ChangeProfile, PasswordChangeForm
+from models import File, User
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth import update_session_auth_hash
 
 
 
@@ -72,7 +74,7 @@ class Editor(View):
     def get(self, request, img_id):
         img_id = int(img_id)
         img = File.objects.get(id=img_id)
-        form = TextInput(initial={'content': img.SearchText()})
+        form = TextInput(initial={'content': img.searchText()})
         return render(request, 'download_files/editor.html',
                       {'img': img, 'form': form})
 
@@ -83,8 +85,7 @@ class Editor(View):
         form = TextInput(request.POST or None)
         if form.is_valid():
             data = form.save()
-            img.SaveChanges(data)
-            # redirect('editor')
+            img.saveChanges(data)
         return render(request, 'download_files/editor.html',
                       {'img': img, 'form': form})
 
@@ -113,9 +114,54 @@ class MyFiles(View):
         form = FileForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             newform = form.save(commit=False)
-            newform.user = request.user
+            user = User.objects.get(id = request.user.id)
+            newform.user = user
             newform.save()
             return redirect('myfiles')
         text = 'error'
         return render(request, 'download_files/index.html',
                       {'text': text})
+
+
+class Profile(View):
+
+    @method_decorator(login_required(redirect_field_name='index'))
+    def get(self, request, type):
+        if type == "password":
+            form = PasswordChangeForm(request.user)
+        if type == "data":
+            this_user = User.objects.get(id = request.user.id)
+            initial = {'first_name': this_user.first_name,
+                'last_name': this_user.last_name,
+                'email': this_user.email
+            }
+            form = ChangeProfile(initial)
+        return render(request, 'download_files/profile.html',
+                      {'nbar': 'prf',
+                       'form': form,
+                       'text': "",
+                       'type': type})
+
+    @method_decorator(login_required(redirect_field_name='index'))
+    def post(self, request, type):
+        text = ''
+        if type == "password":
+            form = PasswordChangeForm(request.user, request.POST)
+        if type == "data":
+            this_user = User.objects.get(id = request.user.id)
+            form = ChangeProfile(request.POST or None)
+        if form.is_valid():
+            if type == "data":
+                this_user.saveChanges(form.cleanData())
+                text = 'Информация изменена'
+            if type == "password":
+                user = form.save()
+                update_session_auth_hash(request, user)
+                text = 'Пароль изменен'
+        else:
+            text = 'error'
+        return render(request, 'download_files/profile.html',
+                      {'nbar': 'prf',
+                       'form': form,
+                       'text': "",
+                       'type': type})

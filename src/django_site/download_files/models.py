@@ -1,10 +1,20 @@
 # coding=utf-8
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User as BaseUser
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.db import models
 from pytesseract import *
 from PIL import Image
+# from .forms import CreateUserForm
+
+
+class User(BaseUser):
+
+    def saveChanges(self, data):
+        self.last_name = (data['last_name'])
+        self.first_name = (data['first_name'])
+        self.email = (data['email'])
+        self.save()
 
 
 class File(models.Model):
@@ -13,7 +23,7 @@ class File(models.Model):
     file = models.ImageField(upload_to='')
     file_out = models.FileField(upload_to='text', default=None)
 
-    def SearchText(self, local='ru'):
+    def searchText(self, local='ru'):
         if len(self.file_out.name) <= 1:   # Дикий костыль
             im = Image.open(settings.BASE_DIR + self.file.url)
             string = image_to_string(im, lang=local)
@@ -22,7 +32,7 @@ class File(models.Model):
         f = open(settings.BASE_DIR + self.file_out.url, 'r')
         return f.read()
 
-    def SaveChanges(self, new_string):
+    def saveChanges(self, new_string):
         f = open(settings.BASE_DIR + self.file_out.url, 'w')
         f.write(new_string)
         f.close()

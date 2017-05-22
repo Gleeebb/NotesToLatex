@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.utils.translation import gettext_lazy as _
 from .models import File, User
 from tinymce import TinyMCE
+from django.contrib.auth.forms import PasswordChangeForm as \
+    BasePasswordChangeForm
 
 
 
@@ -48,6 +50,7 @@ class CreateUserForm(UserCreationForm):
         field_classes = {'username': UsernameField}
 
 
+
 class AuthenticationForm(forms.Form):
     username = UsernameField(
         max_length=254,
@@ -66,3 +69,43 @@ class TextInput(forms.Form):
 
     def save(self):
         return self.cleaned_data['content'].encode('utf-8')
+
+
+class ChangeProfile(forms.Form):
+
+    email = forms.EmailField(
+
+    )
+
+    first_name = forms.CharField(
+        max_length = 30,
+    )
+
+    last_name = forms.CharField(
+        max_length = 30,
+    )
+
+    def cleanData(self):
+        data = {
+            'last_name': self.cleaned_data['last_name'],
+            'first_name': self.cleaned_data['first_name'],
+            'email': self.cleaned_data['email'],
+        }
+        return data
+
+
+class PasswordChangeForm(BasePasswordChangeForm):
+    error_messages = {
+        'password_incorrect': _("Неправильный пароль"),
+    }
+    old_password = forms.CharField(
+        label=_("Старый пароль"),
+        widget=forms.PasswordInput
+        )
+    error_messages = {
+        'password_mismatch': _("Пароли не совпадают"),
+    }
+    new_password1 = forms.CharField(label=_("Новый пароль"),
+                                    widget=forms.PasswordInput)
+    new_password2 = forms.CharField(label=_("Повторите новый пароль"),
+                                    widget=forms.PasswordInput)
