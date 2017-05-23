@@ -129,7 +129,8 @@ class Profile(View):
     @method_decorator(login_required(redirect_field_name='index'))
     def get(self, request, type):
         try:
-            img = ProfilePhoto.objects.filter(user = request.user)[0]
+            img = ProfilePhoto.objects.filter(user = request.user).first()
+            # img = img[0]
         except ProfilePhoto.DoesNotExist:
             img = None
         form_photo = ProfilePhotoForm()

@@ -44,10 +44,10 @@
         </div>
 
         <div class="col-md-5">
-            <div class="col-md-7 col-md-offset-6">
-                <img src="{{img.file.url}}" class="img-circle img-responsive">
-                <form method="POST" class="post" enctype="multipart/form-data"
-                    name="action" value="photo">
+            <div class="col-md-8 col-md-offset-6">
+                <img src="{{img.file.url}}" class="img-rounded img-responsive">
+                <form method="POST" class="post indent" enctype="multipart/form-data"
+                    name="action" value="photo" >
                     {% csrf_token %}
                     {{ form_photo |bootstrap }}
                     <button type="submit" class="save btn btn-primary">Save</button>
