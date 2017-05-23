@@ -32,7 +32,7 @@ class Register(View):
             text = "Cпасибо за регистрацию!"
         else:
             text = r'Registration Error'
-        return render(request, 'download_files/index.html',
+        return render(request, 'download_files/error.html',
                       {'text': text})
 
     def get(self, request):
@@ -52,15 +52,12 @@ class Login(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    text = r"User is valid, active and authenticated"
-                else:
-                    text = r"The password is valid, but the account has\
-                     been disabled!"
+                    text = r"Авторизация успешна!"
             else:
                 text = r'ERROR'
         else:
             text = 'FORM is not valid'
-        return render(request, 'download_files/index.html',
+        return render(request, 'download_files/error.html',
                       {'text':text})
 
     def get(self, request):
@@ -120,7 +117,7 @@ class MyFiles(View):
             newform.save()
             return redirect('myfiles')
         text = 'error'
-        return render(request, 'download_files/index.html',
+        return render(request, 'download_files/error.html',
                       {'text': text})
 
 
@@ -129,7 +126,7 @@ class Profile(View):
     @method_decorator(login_required(redirect_field_name='index'))
     def get(self, request, type):
         try:
-            img = ProfilePhoto.objects.filter(user = request.user).order_by('date').first()
+            img = ProfilePhoto.objects.filter(user = request.user).order_by('-date').first()
         except ProfilePhoto.DoesNotExist:
             img = None
         form_photo = ProfilePhotoForm()

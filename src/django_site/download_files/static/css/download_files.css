@@ -56,3 +56,8 @@ border-right: 1px solid #FFF;
 .indent {
     margin: 10px 1px 20px;
 }
+
+.teammate {
+    min-width: 400px;
+    min-height: 330px;
+}
