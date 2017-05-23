@@ -3,7 +3,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.utils.translation import gettext_lazy as _
-from .models import File, User
+from .models import File, User, ProfilePhoto
 from tinymce import TinyMCE
 from django.contrib.auth.forms import PasswordChangeForm as \
     BasePasswordChangeForm
@@ -20,6 +20,16 @@ class FileForm(forms.ModelForm):
 
     class Meta:
         model = File
+        fields = ['file']
+
+class ProfilePhotoForm(forms.ModelForm):
+    file = forms.ImageField(
+        label = ("Добавить фото"),
+        help_text = "",
+    )
+
+    class Meta:
+        model = ProfilePhoto
         fields = ['file']
 
 

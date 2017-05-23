@@ -34,7 +34,8 @@
                     </a>
                 </div>
             </div>
-            <form method="POST" class="post" enctype="multipart/form-data">
+            <form method="POST" class="post" enctype="multipart/form-data"
+                name="data">
                 {% csrf_token %}
                 {{ form |bootstrap }}
                 <button type="submit" class="save btn btn-primary">Сохранить изменения</button>
@@ -42,10 +43,16 @@
             {{text}}
         </div>
 
-        
-
-        <div class="col-md-3">
-
+        <div class="col-md-5">
+            <div class="col-md-7 col-md-offset-6">
+                <img src="{{img.file.url}}" class="img-circle img-responsive">
+                <form method="POST" class="post" enctype="multipart/form-data"
+                    name="action" value="photo">
+                    {% csrf_token %}
+                    {{ form_photo |bootstrap }}
+                    <button type="submit" class="save btn btn-primary">Save</button>
+                </form>
+            </div>
         </div>
     </div>
 

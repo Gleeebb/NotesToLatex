@@ -4,11 +4,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from forms import FileForm, CreateUserForm, AuthenticationForm, TextInput, \
-                  ChangeProfile, PasswordChangeForm
-from models import File, User
+                  ChangeProfile, PasswordChangeForm, ProfilePhotoForm
+from models import File, User, ProfilePhoto
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth import update_session_auth_hash
+from django.utils.datastructures import MultiValueDictKeyError
 
 
 
@@ -18,7 +19,7 @@ class Index(View):
     def get(self, request):
         text = r'hello'
         return render(request, 'download_files/index.html',
-                      {'text': request.user.id, 'nbar': 'home'})
+                      {'nbar': 'home'})
 
 
 # Представление страницы регистрации пользователей.
@@ -127,6 +128,11 @@ class Profile(View):
 
     @method_decorator(login_required(redirect_field_name='index'))
     def get(self, request, type):
+        try:
+            img = ProfilePhoto.objects.filter(user = request.user)[0]
+        except ProfilePhoto.DoesNotExist:
+            img = None
+        form_photo = ProfilePhotoForm()
         if type == "password":
             form = PasswordChangeForm(request.user)
         if type == "data":
@@ -140,11 +146,13 @@ class Profile(View):
                       {'nbar': 'prf',
                        'form': form,
                        'text': "",
-                       'type': type})
+                       'type': type,
+                       'img': img,
+                       'form_photo': form_photo})
 
     @method_decorator(login_required(redirect_field_name='index'))
     def post(self, request, type):
-        text = ''
+
         if type == "password":
             form = PasswordChangeForm(request.user, request.POST)
         if type == "data":
@@ -153,15 +161,21 @@ class Profile(View):
         if form.is_valid():
             if type == "data":
                 this_user.saveChanges(form.cleanData())
-                text = 'Информация изменена'
             if type == "password":
                 user = form.save()
                 update_session_auth_hash(request, user)
-                text = 'Пароль изменен'
-        else:
-            text = 'error'
-        return render(request, 'download_files/profile.html',
-                      {'nbar': 'prf',
-                       'form': form,
-                       'text': "",
-                       'type': type})
+
+        form = ProfilePhotoForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            newform = form.save(commit=False)
+            user = User.objects.get(id = request.user.id)
+            newform.user = user
+            newform.save()
+        return redirect('/profile/data')
+
+
+class Contacts(View):
+
+    def get(self, request):
+        return render(request, 'download_files/contacts.html',
+                      {'nbar': 'cnt'})

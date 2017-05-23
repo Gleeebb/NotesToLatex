@@ -40,7 +40,10 @@
                                 <a href="/files/">My files</a>
                             </li>
                         {% endif %}
-                        <li><a href="/">Contact</a></li>
+                        <li class="{% if nbar == 'cnt' %}
+                                        active{% endif %}">
+                            <a href="/contacts/">Contacts</a>
+                        </li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -86,11 +89,9 @@
                 </div>
             </div>
 
-            <div class= "row" role="main">
-                <div class="col-md-9 col-md-push-1">
-                    {% block content %}
-                    {% endblock %}
-                </div>
+            <div class="col-md-10 col-md-push-1">
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
 
