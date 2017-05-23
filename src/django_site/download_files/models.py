@@ -42,3 +42,4 @@ class ProfilePhoto(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     file = models.ImageField(upload_to='')
+    date = models.DateTimeField(auto_now_add=True, blank=True)
