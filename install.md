@@ -4,11 +4,18 @@
 
 Инструкция только для текующего, недоработанного, функционала.
 
-## Установка и настройка **virtualenv**
+## Установка и настройка **virtualenv** (Linux)
 ```bash
 sudo pip install virtualenv
 virtualenv Notes
 source ./Notes/bin/activate
+cd ./Notes
+```
+
+## Для Mac можно воспользоваться **conda**
+```bash
+conda create -n Notes
+source activate Notes
 cd ./Notes
 ```
 
@@ -27,7 +34,7 @@ pip install pytesseract
 pip install pillow
 ```
 
-## Установка средства распознавания текста
+## Установка средства распознавания текста (для Linux)
 ```bash
 sudo apt-get install tesseract-ocr
 wget https://github.com/tesseract-ocr/tessdata/raw/master/rus.traineddata
@@ -44,7 +51,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-Все подготовитьельные работы выполнены, можно запустить приложение. 
+Все подготовительные работы выполнены, можно запустить приложение. 
 
 ## Запуск приложения
 ```bash
