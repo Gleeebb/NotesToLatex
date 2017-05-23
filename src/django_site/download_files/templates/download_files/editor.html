@@ -15,9 +15,16 @@
                 <form method="POST" action=".">
                     {% csrf_token %}
                     {{form.content}}
-                    <button class="btn btn-primary active" type="submit">
-                        Сохранить
-                    </button>
+                    <div class="col-md-2 col-md-push-3 indent">
+                        <button class="btn btn-primary active " type="submit">
+                            Сохранить
+                        </button>
+                    </div>
+                    <div class="col-md-2 col-md-push-3 indent">
+                        <button class="btn btn-primary active " type="submit">
+                            Сохранить
+                        </button>
+                    </div>
                 </form>
             </div>
             <div class="col-md-6">
