@@ -41,7 +41,7 @@ wget https://github.com/tesseract-ocr/tessdata/raw/master/rus.traineddata
 mv "rus.traineddata" "ru.traineddata"
 sudo mv -v ru.traineddata /usr/share/tesseract-ocr/tessdata
 ```
-Возможно, на Вашем устройстве будет необходимо перенести этот файл в другую директорию.
+Возможно, на Вашем устройстве будет необходимо перенести этот файл в другую директорию. 
 Если перенесена не в ту, будет ошибка во время расспознавания русского текста.
 
 ## Настройка приложения
