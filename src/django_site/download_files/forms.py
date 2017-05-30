@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.utils.translation import gettext_lazy as _
 from .models import File, User, ProfilePhoto
-from tinymce import TinyMCE
+from tinymce import *
 from django.contrib.auth.forms import PasswordChangeForm as \
     BasePasswordChangeForm
 
@@ -75,7 +75,7 @@ class AuthenticationForm(forms.Form):
 
 
 class TextInput(forms.Form):
-    content = forms.CharField(widget=TinyMCE(mce_attrs={}))
+    content = forms.CharField(widget=TinyMCE(mce_attrs={'width': '99%'}))
 
     def save(self):
         return self.cleaned_data['content'].encode('utf-8')

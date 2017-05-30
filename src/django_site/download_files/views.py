@@ -3,7 +3,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
-from forms import FileForm, CreateUserForm, AuthenticationForm, TextInput, \
+from .forms import FileForm, CreateUserForm, AuthenticationForm, TextInput, \
                   ChangeProfile, PasswordChangeForm, ProfilePhotoForm
 from models import File, User, ProfilePhoto
 from django.contrib.auth.decorators import login_required
